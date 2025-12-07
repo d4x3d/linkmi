@@ -4,15 +4,20 @@ export default authkitMiddleware({
   eagerAuth: true,
   middlewareAuth: {
     enabled: true,
-    unauthenticatedPaths: ['/', '/sign-in', '/sign-up'],
+    unauthenticatedPaths: [
+      '/',
+      '/sign-in',
+      '/sign-up',
+      '/paystack/callback',
+    ],
   },
 });
 
 export const config = {
   matcher: [
-    // Skip Next.js internals and all static files, unless found in search params
-    '/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)',
-    // Always run for API routes
+    // Protect dashboard routes
+    '/dashboard/:path*',
+    // Protect API routes
     '/(api|trpc)(.*)',
   ],
 };
