@@ -29,12 +29,29 @@ export default function Home() {
     <div className="flex flex-col min-h-screen bg-neutral-50 dark:bg-neutral-900">
       <header className="px-6 py-4 flex items-center justify-between border-b border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950">
         <div className="flex items-center gap-2">
-          <span className="text-xl font-bold bg-gradient-to-r from-violet-600 to-indigo-600 bg-clip-text text-transparent">LinkMi</span>
+          <span className="text-xl font-bold bg-gradient-to-r from-violet-600 to-indigo-600 bg-clip-text text-transparent">
+            LinkMi
+          </span>
         </div>
         <nav className="hidden md:flex items-center gap-6">
-          <Link href="#" className="text-sm font-medium text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100">Features</Link>
-          <Link href="#" className="text-sm font-medium text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100">Pricing</Link>
-          <Link href="#" className="text-sm font-medium text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100">About</Link>
+          <Link
+            href="#"
+            className="text-sm font-medium text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100"
+          >
+            Features
+          </Link>
+          <Link
+            href="#"
+            className="text-sm font-medium text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100"
+          >
+            Pricing
+          </Link>
+          <Link
+            href="#"
+            className="text-sm font-medium text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100"
+          >
+            About
+          </Link>
         </nav>
         <div className="flex items-center gap-4">
           <Link href="/sign-in">
@@ -52,7 +69,8 @@ export default function Home() {
             One Link for Everything You Are
           </h1>
           <p className="text-lg md:text-xl text-neutral-500 dark:text-neutral-400 max-w-2xl mx-auto">
-            Create a beautiful, personalized page to showcase your content, sell digital products, and grow your audience. All in one place.
+            Create a beautiful, personalized page to showcase your content, sell digital products, and grow your
+            audience. All in one place.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
             <Link href="/sign-up">
