@@ -33,10 +33,39 @@ import {
 } from 'lucide-react';
 
 // React Icons
+import { FaInstagram, FaYoutube, FaTiktok, FaLinkedin, FaGithub, FaFacebook } from 'react-icons/fa';
+import { SiX } from 'react-icons/si';
+import { MdEmail, MdWeb } from 'react-icons/md';
+import type { IconType } from 'react-icons';
 
 import ImageUpload from '@/components/ImageUpload';
 import { cn } from '@/lib/utils';
 import MeshBackground from '@/components/MeshBackground';
+
+// Social platform icons mapping
+const SOCIAL_ICONS: Record<string, IconType> = {
+  instagram: FaInstagram,
+  twitter: SiX,
+  youtube: FaYoutube,
+  tiktok: FaTiktok,
+  linkedin: FaLinkedin,
+  github: FaGithub,
+  facebook: FaFacebook,
+  email: MdEmail,
+  website: MdWeb,
+};
+
+const SOCIAL_COLORS: Record<string, string> = {
+  instagram: '#E4405F',
+  twitter: '#000000',
+  youtube: '#FF0000',
+  tiktok: '#000000',
+  linkedin: '#0A66C2',
+  github: '#181717',
+  facebook: '#1877F2',
+  email: '#6366f1',
+  website: '#6366f1',
+};
 
 // ============================================
 // CONSTANTS
@@ -302,11 +331,11 @@ export default function AppearancePage() {
   );
 
   return (
-    <div className="flex flex-col lg:flex-row h-[calc(100vh-4rem)] overflow-hidden bg-neutral-100 dark:bg-neutral-900">
+    <div className="fixed inset-0 md:left-64 flex overflow-hidden bg-neutral-100 dark:bg-neutral-900">
       {/* Mobile Sidebar Toggle */}
       <button
         onClick={() => setMobileSidebarOpen(!mobileSidebarOpen)}
-        className="lg:hidden fixed bottom-6 right-6 z-50 bg-violet-600 text-white p-4 rounded-full shadow-lg transition-transform active:scale-95"
+        className="md:hidden fixed bottom-6 right-6 z-50 bg-violet-600 text-white p-4 rounded-full shadow-lg transition-transform active:scale-95"
       >
         {mobileSidebarOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
       </button>
@@ -314,8 +343,8 @@ export default function AppearancePage() {
       {/* EDITOR PANEL */}
       <div
         className={cn(
-          'fixed lg:relative inset-y-0 left-0 z-40 w-full sm:w-[400px] bg-white dark:bg-neutral-950 border-r border-neutral-200 dark:border-neutral-800 shadow-xl lg:shadow-none transition-transform duration-300 flex flex-col',
-          mobileSidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0',
+          'fixed md:relative inset-y-0 left-0 z-40 w-full sm:w-[380px] md:w-[320px] lg:w-[380px] bg-white dark:bg-neutral-950 border-r border-neutral-200 dark:border-neutral-800 shadow-xl md:shadow-none transition-transform duration-300 flex flex-col',
+          mobileSidebarOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0',
         )}
       >
         {/* Header */}
@@ -324,26 +353,28 @@ export default function AppearancePage() {
             <h2 className="text-lg font-bold text-neutral-900 dark:text-white">Appearance</h2>
             <div className="flex items-center gap-2">
               {/* Preview toggle for mobile/desktop */}
-              <div className="hidden lg:flex bg-neutral-100 dark:bg-neutral-800 p-1 rounded-lg mr-2">
+              <div className="hidden md:flex bg-neutral-100 dark:bg-neutral-800 p-1 rounded-lg mr-2">
                 <button
                   onClick={() => setPreviewMode('mobile')}
                   className={cn(
-                    'p-1.5 rounded-md',
+                    'p-1.5 rounded-md transition-colors',
                     previewMode === 'mobile'
-                      ? 'bg-white dark:bg-neutral-600 shadow-sm'
+                      ? 'bg-white dark:bg-neutral-600 shadow-sm text-neutral-900 dark:text-white'
                       : 'hover:text-neutral-900 dark:hover:text-white text-neutral-500',
                   )}
+                  title="Mobile Preview"
                 >
                   <Smartphone className="w-4 h-4" />
                 </button>
                 <button
                   onClick={() => setPreviewMode('desktop')}
                   className={cn(
-                    'p-1.5 rounded-md',
+                    'p-1.5 rounded-md transition-colors',
                     previewMode === 'desktop'
-                      ? 'bg-white dark:bg-neutral-600 shadow-sm'
+                      ? 'bg-white dark:bg-neutral-600 shadow-sm text-neutral-900 dark:text-white'
                       : 'hover:text-neutral-900 dark:hover:text-white text-neutral-500',
                   )}
+                  title="Desktop Preview"
                 >
                   <Monitor className="w-4 h-4" />
                 </button>
@@ -358,7 +389,7 @@ export default function AppearancePage() {
                 {isSaving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
                 Save
               </Button>
-              <button onClick={() => setMobileSidebarOpen(false)} className="lg:hidden p-2">
+              <button onClick={() => setMobileSidebarOpen(false)} className="md:hidden p-2">
                 <X className="w-5 h-5" />
               </button>
             </div>
@@ -373,12 +404,12 @@ export default function AppearancePage() {
         </div>
 
         {/* Content - No Scrollbar */}
-        <div className="flex-1 overflow-y-auto p-4 space-y-6 scrollbar-hide">
+        <div className="flex-1 overflow-y-auto p-4 space-y-4 scrollbar-hide">
           {activeTab === 'profile' && (
             <>
               <section className="space-y-3">
-                <Label>Profile Picture</Label>
-                <div className="flex items-center gap-4 p-4 bg-neutral-50 dark:bg-neutral-900 rounded-xl border">
+                <Label className="text-neutral-700 dark:text-neutral-300">Profile Picture</Label>
+                <div className="flex items-center gap-4 p-4 bg-neutral-50 dark:bg-neutral-900 rounded-xl border border-neutral-200 dark:border-neutral-800">
                   <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-violet-200">
                     {user.profileImageUrl ? (
                       <img src={user.profileImageUrl} alt="Profile" className="w-full h-full object-cover" />
@@ -395,14 +426,14 @@ export default function AppearancePage() {
               </section>
 
               <section className="space-y-2">
-                <Label>Display Name</Label>
+                <Label className="text-neutral-700 dark:text-neutral-300">Display Name</Label>
                 <Input value={title} onChange={(e) => setTitle(e.target.value)} placeholder="@yourname" />
               </section>
 
               <section className="space-y-2">
                 <div className="flex justify-between items-center">
-                  <Label>Bio</Label>
-                  <span className="text-xs text-neutral-400">{bio.length}/150</span>
+                  <Label className="text-neutral-700 dark:text-neutral-300">Bio</Label>
+                  <span className="text-xs text-neutral-400 dark:text-neutral-500">{bio.length}/150</span>
                 </div>
                 <Textarea
                   value={bio}
@@ -417,7 +448,7 @@ export default function AppearancePage() {
           {activeTab === 'design' && (
             <>
               <section className="space-y-3">
-                <Label>Typography</Label>
+                <Label className="text-neutral-700 dark:text-neutral-300">Typography</Label>
                 <div className="grid grid-cols-2 gap-2">
                   {FONTS.map((font) => (
                     <button
@@ -438,7 +469,7 @@ export default function AppearancePage() {
               </section>
 
               <section className="space-y-3">
-                <Label>Background</Label>
+                <Label className="text-neutral-700 dark:text-neutral-300">Background</Label>
                 <Select value={backgroundStyle} onValueChange={setBackgroundStyle}>
                   <SelectTrigger>
                     <SelectValue />
@@ -497,7 +528,7 @@ export default function AppearancePage() {
               </section>
 
               <section className="space-y-3">
-                <Label>Text Colors</Label>
+                <Label className="text-neutral-700 dark:text-neutral-300">Text Colors</Label>
                 <div className="grid grid-cols-2 gap-3">
                   <div className="space-y-2">
                     <Label className="text-xs text-neutral-500">Primary</Label>
@@ -535,7 +566,7 @@ export default function AppearancePage() {
               </section>
 
               <section className="space-y-3">
-                <Label className="flex items-center gap-2">
+                <Label className="flex items-center gap-2 text-neutral-700 dark:text-neutral-300">
                   <Sparkles className="w-4 h-4 text-amber-500" />
                   Text Effects
                 </Label>
@@ -546,14 +577,16 @@ export default function AppearancePage() {
                       onClick={() => setEffect(eff.id)}
                       className={cn(
                         'w-full p-3 rounded-xl border-2 text-left transition-all flex justify-between items-center',
-                        effect === eff.id ? 'border-violet-500 bg-violet-50' : 'border-neutral-200',
+                        effect === eff.id
+                          ? 'border-violet-500 bg-violet-50 dark:bg-violet-900/30'
+                          : 'border-neutral-200 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800',
                       )}
                     >
                       <div>
-                        <span className="font-medium text-sm">{eff.name}</span>
-                        <span className="block text-xs text-neutral-500">{eff.description}</span>
+                        <span className="font-medium text-sm text-neutral-900 dark:text-neutral-100">{eff.name}</span>
+                        <span className="block text-xs text-neutral-500 dark:text-neutral-400">{eff.description}</span>
                       </div>
-                      {effect === eff.id && <Check className="w-4 h-4 text-violet-600" />}
+                      {effect === eff.id && <Check className="w-4 h-4 text-violet-600 dark:text-violet-400" />}
                     </button>
                   ))}
                 </div>
@@ -564,7 +597,7 @@ export default function AppearancePage() {
           {activeTab === 'layout' && (
             <>
               <section className="space-y-3">
-                <Label>Content Layout</Label>
+                <Label className="text-neutral-700 dark:text-neutral-300">Content Layout</Label>
                 <div className="grid grid-cols-2 gap-3">
                   {[
                     { id: 'list', name: 'List View', icon: List },
@@ -575,18 +608,20 @@ export default function AppearancePage() {
                       onClick={() => setLayoutStyle(layout.id)}
                       className={cn(
                         'p-4 rounded-xl border-2 transition-all flex flex-col items-center gap-2',
-                        layoutStyle === layout.id ? 'border-violet-500 bg-violet-50' : 'border-neutral-200',
+                        layoutStyle === layout.id
+                          ? 'border-violet-500 bg-violet-50 dark:bg-violet-900/30'
+                          : 'border-neutral-200 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800',
                       )}
                     >
-                      <layout.icon className="w-6 h-6" />
-                      <span className="font-medium text-sm">{layout.name}</span>
+                      <layout.icon className="w-6 h-6 text-neutral-900 dark:text-neutral-100" />
+                      <span className="font-medium text-sm text-neutral-900 dark:text-neutral-100">{layout.name}</span>
                     </button>
                   ))}
                 </div>
               </section>
 
               <section className="space-y-3">
-                <Label>Button Style</Label>
+                <Label className="text-neutral-700 dark:text-neutral-300">Button Style</Label>
                 <div className="grid grid-cols-3 gap-2">
                   {BUTTON_STYLES.map((style) => (
                     <button
@@ -594,18 +629,20 @@ export default function AppearancePage() {
                       onClick={() => setButtonStyle(style.id)}
                       className={cn(
                         'p-3 border-2 transition-all flex flex-col items-center gap-2 rounded-lg',
-                        buttonStyle === style.id ? 'border-violet-500 bg-violet-50' : 'border-neutral-200',
+                        buttonStyle === style.id
+                          ? 'border-violet-500 bg-violet-50 dark:bg-violet-900/30'
+                          : 'border-neutral-200 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800',
                       )}
                     >
-                      <div className="w-full h-6 bg-neutral-800" style={{ borderRadius: style.radius }} />
-                      <span className="text-xs font-medium">{style.name}</span>
+                      <div className="w-full h-6 bg-neutral-800 dark:bg-neutral-300" style={{ borderRadius: style.radius }} />
+                      <span className="text-xs font-medium text-neutral-900 dark:text-neutral-100">{style.name}</span>
                     </button>
                   ))}
                 </div>
               </section>
 
               <section className="space-y-3">
-                <Label>Button Color</Label>
+                <Label className="text-neutral-700 dark:text-neutral-300">Button Color</Label>
                 <div className="flex gap-2 items-center">
                   <Input
                     type="color"
@@ -622,7 +659,7 @@ export default function AppearancePage() {
               </section>
 
               <section className="space-y-3">
-                <Label>Card Style</Label>
+                <Label className="text-neutral-700 dark:text-neutral-300">Card Style</Label>
                 <div className="grid grid-cols-2 gap-2">
                   {CARD_STYLES.map((style) => (
                     <button
@@ -630,11 +667,13 @@ export default function AppearancePage() {
                       onClick={() => setCardStyle(style.id)}
                       className={cn(
                         'p-3 rounded-xl border-2 text-left transition-all',
-                        cardStyle === style.id ? 'border-violet-500 bg-violet-50' : 'border-neutral-200',
+                        cardStyle === style.id
+                          ? 'border-violet-500 bg-violet-50 dark:bg-violet-900/30'
+                          : 'border-neutral-200 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800',
                       )}
                     >
-                      <span className="font-medium text-sm">{style.name}</span>
-                      <span className="block text-xs text-neutral-500">{style.description}</span>
+                      <span className="font-medium text-sm text-neutral-900 dark:text-neutral-100">{style.name}</span>
+                      <span className="block text-xs text-neutral-500 dark:text-neutral-400">{style.description}</span>
                     </button>
                   ))}
                 </div>
@@ -645,17 +684,21 @@ export default function AppearancePage() {
       </div>
 
       {/* PREVIEW PANEL */}
-      <div className="flex-1 bg-neutral-100 p-8 flex items-center justify-center overflow-hidden relative">
-        <div className="absolute inset-0 pattern-grid-lg text-neutral-200 opacity-50" />
+      <div className="flex-1 bg-neutral-100 dark:bg-neutral-900 p-4 md:p-6 lg:p-8 flex items-center justify-center overflow-hidden relative">
+        <div className="absolute inset-0 pattern-grid-lg text-neutral-200 dark:text-neutral-700 opacity-50" />
 
         <div
           className={cn(
-            'relative w-[340px] h-[700px] border-[12px] border-neutral-900 rounded-[3rem] bg-white overflow-hidden shadow-2xl ring-1 ring-black/5 z-10 transition-all',
-            previewMode === 'desktop' && 'w-full h-full max-w-5xl rounded-lg border-4',
+            'relative transition-all',
+            previewMode === 'mobile'
+              ? 'w-[340px] h-[700px] border-[14px] border-black rounded-[3rem] bg-white dark:bg-neutral-800 overflow-hidden shadow-2xl ring-1 ring-black/5 dark:ring-white/5 z-10'
+              : 'w-full h-full max-w-6xl border-4 border-black rounded-lg bg-white dark:bg-neutral-800 overflow-hidden shadow-2xl ring-1 ring-black/5 dark:ring-white/5 z-10',
           )}
         >
-          {/* Notch */}
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-6 bg-neutral-900 rounded-b-xl z-30" />
+          {/* Notch - only show in mobile preview */}
+          {previewMode === 'mobile' && (
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-6 bg-black rounded-b-xl z-30" />
+          )}
 
           {/* Screen Content */}
           <div
@@ -683,7 +726,7 @@ export default function AppearancePage() {
             )}
 
             {/* Content Container */}
-            <div className="relative z-10 p-6 pt-20 flex flex-col items-center">
+            <div className={cn('relative z-10 flex flex-col items-center', previewMode === 'mobile' ? 'p-6 pt-20' : 'p-8 pt-12')}>
               {/* Profile Image */}
               <div className="w-24 h-24 rounded-full mb-4 overflow-hidden border-4 border-white/20 shadow-lg">
                 {user.profileImageUrl ? (
@@ -713,7 +756,32 @@ export default function AppearancePage() {
               </div>
 
               {/* Bio */}
-              {bio && <p className="text-sm text-center mb-6 opacity-80 max-w-[90%] whitespace-pre-wrap">{bio}</p>}
+              {bio && <p className="text-sm text-center mb-4 opacity-80 max-w-[90%] whitespace-pre-wrap">{bio}</p>}
+
+              {/* Social Media Links */}
+              {user.socials && user.socials.length > 0 && (
+                <div className="flex gap-3 mb-6 flex-wrap justify-center">
+                  {user.socials
+                    .filter((s: any) => (s.isVisible || s.active) && s.url)
+                    .map((social: { platform: string; url: string }, idx: number) => {
+                      const Icon = SOCIAL_ICONS[social.platform] || MdWeb;
+                      const iconColor = SOCIAL_COLORS[social.platform] || '#6366f1';
+
+                      return (
+                        <div
+                          key={idx}
+                          className="w-10 h-10 rounded-full flex items-center justify-center transition-transform hover:scale-110"
+                          style={{
+                            backgroundColor: isDarkBg ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.05)',
+                            border: `2px solid ${isDarkBg ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.1)'}`,
+                          }}
+                        >
+                          <Icon className="w-5 h-5" style={{ color: iconColor }} />
+                        </div>
+                      );
+                    })}
+                </div>
+              )}
 
               {/* Links & Products */}
               <div className="w-full space-y-4">

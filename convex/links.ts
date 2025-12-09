@@ -39,6 +39,13 @@ export const create = mutation({
     url: v.string(),
     imageId: v.optional(v.id('_storage')),
     isActive: v.optional(v.boolean()),
+    useMetadata: v.optional(v.boolean()),
+    description: v.optional(v.string()),
+    metadataImage: v.optional(v.string()),
+    isAdult: v.optional(v.boolean()),
+    isRepo: v.optional(v.boolean()),
+    livePreviewUrl: v.optional(v.string()),
+    repoUrl: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
     const identity = await ctx.auth.getUserIdentity();
@@ -65,6 +72,13 @@ export const create = mutation({
       position: maxPosition + 1,
       imageId: args.imageId,
       isActive: args.isActive !== undefined ? args.isActive : true,
+      useMetadata: args.useMetadata !== undefined ? args.useMetadata : true,
+      description: args.description,
+      metadataImage: args.metadataImage,
+      isAdult: args.isAdult || false,
+      isRepo: args.isRepo || false,
+      livePreviewUrl: args.livePreviewUrl,
+      repoUrl: args.repoUrl,
     });
   },
 });
@@ -77,6 +91,13 @@ export const update = mutation({
     position: v.optional(v.number()),
     imageId: v.optional(v.id('_storage')),
     isActive: v.optional(v.boolean()),
+    useMetadata: v.optional(v.boolean()),
+    description: v.optional(v.string()),
+    metadataImage: v.optional(v.string()),
+    isAdult: v.optional(v.boolean()),
+    isRepo: v.optional(v.boolean()),
+    livePreviewUrl: v.optional(v.string()),
+    repoUrl: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
     const identity = await ctx.auth.getUserIdentity();
@@ -100,6 +121,13 @@ export const update = mutation({
     if (args.position !== undefined) updates.position = args.position;
     if (args.imageId !== undefined) updates.imageId = args.imageId;
     if (args.isActive !== undefined) updates.isActive = args.isActive;
+    if (args.useMetadata !== undefined) updates.useMetadata = args.useMetadata;
+    if (args.description !== undefined) updates.description = args.description;
+    if (args.metadataImage !== undefined) updates.metadataImage = args.metadataImage;
+    if (args.isAdult !== undefined) updates.isAdult = args.isAdult;
+    if (args.isRepo !== undefined) updates.isRepo = args.isRepo;
+    if (args.livePreviewUrl !== undefined) updates.livePreviewUrl = args.livePreviewUrl;
+    if (args.repoUrl !== undefined) updates.repoUrl = args.repoUrl;
 
     await ctx.db.patch(args.id, updates);
   },

@@ -192,4 +192,20 @@
     font-weight: 400;
     font-style: normal;
   }
+  
+  /* Subtle neo-brutalism shadow for buttons and interactive elements */
+  button, .button, [role="button"] {
+    box-shadow: 0 3px 0 0 rgba(0, 0, 0, 0.15);
+    transition: all 0.15s ease;
+  }
+  
+  button:hover, .button:hover, [role="button"]:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 0 0 rgba(0, 0, 0, 0.2);
+  }
+  
+  button:active, .button:active, [role="button"]:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.15);
+  }
 }

@@ -28,15 +28,16 @@ export default function DashboardPage() {
   const hasNoLinks = links.length === 0;
 
   return (
-    <div className="space-y-8">
-      <div>
-        <h2 className="text-3xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100">
-          Welcome back{user?.title ? `, ${user.title}` : ''}
-        </h2>
-        <p className="text-neutral-500 dark:text-neutral-400 mt-2">
-          Here&apos;s what&apos;s happening with your page today.
-        </p>
-      </div>
+    <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
+      <div className="space-y-8">
+        <div>
+          <h2 className="text-3xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100">
+            Welcome back{user?.title ? `, ${user.title}` : ''}
+          </h2>
+          <p className="text-neutral-500 dark:text-neutral-400 mt-2">
+            Here&apos;s what&apos;s happening with your page today.
+          </p>
+        </div>
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <StatsCard title="Total Views" value={metrics?.totalViews?.toString() || '0'} icon={Eye} />
@@ -87,6 +88,7 @@ export default function DashboardPage() {
             </Button>
           </CardContent>
         </Card>
+      </div>
       </div>
     </div>
   );

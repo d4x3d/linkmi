@@ -144,12 +144,13 @@ export default function StorePage() {
   };
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <div>
-          <h2 className="text-2xl font-bold tracking-tight">Store</h2>
-          <p className="text-neutral-500">Manage your digital products.</p>
-        </div>
+    <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
+      <div className="space-y-6">
+        <div className="flex items-center justify-between">
+          <div>
+            <h2 className="text-2xl font-bold tracking-tight">Store</h2>
+            <p className="text-neutral-500">Manage your digital products.</p>
+          </div>
         <Dialog open={isCreateOpen} onOpenChange={setIsCreateOpen}>
           <DialogTrigger asChild>
             <Button className="bg-violet-600 hover:bg-violet-700 text-white">
@@ -477,6 +478,7 @@ export default function StorePage() {
             </Button>
           </div>
         )}
+      </div>
       </div>
     </div>
   );

@@ -15,6 +15,7 @@ import type * as email from "../email.js";
 import type * as files from "../files.js";
 import type * as finance from "../finance.js";
 import type * as links from "../links.js";
+import type * as metadata from "../metadata.js";
 import type * as payouts from "../payouts.js";
 import type * as paystack from "../paystack.js";
 import type * as products from "../products.js";
@@ -36,6 +37,7 @@ declare const fullApi: ApiFromModules<{
   files: typeof files;
   finance: typeof finance;
   links: typeof links;
+  metadata: typeof metadata;
   payouts: typeof payouts;
   paystack: typeof paystack;
   products: typeof products;

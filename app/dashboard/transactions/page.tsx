@@ -139,14 +139,15 @@ export default function TransactionsPage() {
   const successfulTransactions = purchases.filter((p: any) => p.status === 'success').length;
 
   return (
-    <div className="space-y-6">
-      <div className="flex justify-between items-center">
-        <div>
-          <h2 className="text-2xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100">
-            Transaction History
-          </h2>
-          <p className="text-neutral-500">View all your sales, withdrawals, and payouts.</p>
-        </div>
+    <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
+      <div className="space-y-6">
+        <div className="flex justify-between items-center">
+          <div>
+            <h2 className="text-2xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100">
+              Transaction History
+            </h2>
+            <p className="text-neutral-500">View all your sales, withdrawals, and payouts.</p>
+          </div>
 
         <Dialog open={isWithdrawOpen} onOpenChange={setIsWithdrawOpen}>
           <DialogTrigger asChild>
@@ -367,6 +368,7 @@ export default function TransactionsPage() {
           )}
         </CardContent>
       </Card>
+      </div>
     </div>
   );
 }

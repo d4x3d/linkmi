@@ -74,12 +74,13 @@ export default function SettingsPage() {
   };
 
   return (
-    <div className="max-w-2xl mx-auto space-y-6 pb-10">
-      {/* Header */}
-      <div>
-        <h2 className="text-2xl font-bold tracking-tight text-neutral-900 dark:text-white">Settings</h2>
-        <p className="text-neutral-500 dark:text-neutral-400">Manage your account preferences.</p>
-      </div>
+    <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-2xl mx-auto space-y-6 pb-10">
+        {/* Header */}
+        <div>
+          <h2 className="text-2xl font-bold tracking-tight text-neutral-900 dark:text-white">Settings</h2>
+          <p className="text-neutral-500 dark:text-neutral-400">Manage your account preferences.</p>
+        </div>
 
       {/* Appearance Card */}
       <Card className="border-neutral-200 dark:border-neutral-800">
@@ -196,6 +197,7 @@ export default function SettingsPage() {
           </div>
         </CardContent>
       </Card>
+      </div>
     </div>
   );
 }

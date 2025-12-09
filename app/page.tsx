@@ -1,11 +1,13 @@
 'use client';
 
 import Image from 'next/image';
-import TitleWithEffect from '@/components/TitleWithEffect';
+import LightPillar from '@/components/Lightpillar';
+import RotatingText from '@/components/RotatingText';
+import GradientText from '@/components/GradientText';
 import { useQuery } from 'convex/react';
 import { api } from '@/convex/_generated/api';
 import { useRouter } from 'next/navigation';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useConvexAuth } from 'convex/react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
@@ -28,34 +30,29 @@ export default function Home() {
   }, [isAuthenticated, isLoading, user, router]);
 
   return (
-    <div className="flex flex-col min-h-screen bg-neutral-50 dark:bg-neutral-900">
-      <header className="px-6 py-4 flex items-center justify-between border-b border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950">
+    <div className="flex flex-col min-h-screen bg-neutral-50 dark:bg-neutral-900 relative">
+      <div className="fixed inset-0 w-full h-full" style={{ zIndex: 0 }}>
+        <LightPillar
+          topColor="#5227FF"
+          bottomColor="#FF9FFC"
+          intensity={1}
+          rotationSpeed={2}
+          glowAmount={0.003}
+          pillarWidth={3.0}
+          pillarHeight={0.4}
+          noiseIntensity={0.5}
+          pillarRotation={240}
+          interactive={false}
+          mixBlendMode="normal"
+        />
+      </div>
+      <header className="fixed top-4 left-1/2 -translate-x-1/2 w-[90%] md:w-[600px] lg:w-[700px] px-6 py-4 flex items-center justify-between border border-white/10 bg-white/10 backdrop-blur-md rounded-full z-50">
         <div className="flex items-center gap-2">
           <Image src="/favicon.png" alt="Slobi Logo" width={32} height={32} className="rounded-lg" />
           <span className="text-xl font-bold bg-gradient-to-r from-violet-600 to-indigo-600 bg-clip-text text-transparent">
             Slobi
           </span>
         </div>
-        <nav className="hidden md:flex items-center gap-6">
-          <Link
-            href="#"
-            className="text-sm font-medium text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100"
-          >
-            Features
-          </Link>
-          <Link
-            href="#"
-            className="text-sm font-medium text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100"
-          >
-            Pricing
-          </Link>
-          <Link
-            href="#"
-            className="text-sm font-medium text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100"
-          >
-            About
-          </Link>
-        </nav>
         <div className="flex items-center gap-4">
           <Link href="/sign-in">
             <Button variant="ghost">Sign In</Button>
@@ -67,16 +64,32 @@ export default function Home() {
       </header>
 
       <main className="flex-1 flex flex-col items-center justify-center text-center px-4">
-        <div className="max-w-3xl space-y-6">
-          <TitleWithEffect
-            title="One Link for Everything You Are"
-            effect="typewriter"
-            textColor="black"
-            className='chewy-regular'
-          />
-          <p className="text-lg md:text-xl text-neutral-500 dark:text-neutral-400 max-w-2xl mx-auto">
-            Create a beautiful, personalized page to showcase your content, sell digital products, and grow your
-            audience. All in one place.
+        <div className="max-w-3xl space-y-6" style={{ position: 'relative', zIndex: 1 }}>
+          <h1 className="text-5xl md:text-7xl font-bold text-white chewy-regular leading-tight">
+            Your{' '}
+            <RotatingText
+              texts={['Portfolio', 'Store', 'Community', 'Hub']}
+              mainClassName="inline-flex overflow-hidden justify-center"
+              staggerFrom="last"
+              initial={{ y: '100%' }}
+              animate={{ y: 0 }}
+              exit={{ y: '-120%' }}
+              staggerDuration={0.025}
+              splitLevelClassName="overflow-hidden pb-0.5 sm:pb-1 md:pb-1"
+              transition={{ type: 'spring', damping: 30, stiffness: 400 }}
+              rotationInterval={2000}
+            />{' '}
+            in One Link
+          </h1>
+          <p className="text-lg md:text-xl max-w-2xl mx-auto">
+            <GradientText
+              colors={['#5227FF', '#FF9FFC', '#5227FF', '#FF9FFC', '#5227FF']}
+              animationSpeed={3}
+              showBorder={false}
+              className="font-medium"
+            >
+              A customizable link where you can showcase your work, sell digital products, build your portfolio, and support your community. All in one place.
+            </GradientText>
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
             <Link href="/sign-up">
@@ -93,7 +106,7 @@ export default function Home() {
         </div>
       </main>
 
-      <footer className="py-8 border-t border-neutral-200 dark:border-neutral-800 text-center text-sm text-neutral-500">
+      <footer className="py-8 text-center text-sm text-white" style={{ position: 'relative', zIndex: 1 }}>
         &copy; {new Date().getFullYear()} Slobi. All rights reserved.
       </footer>
     </div>

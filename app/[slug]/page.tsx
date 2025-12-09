@@ -7,6 +7,7 @@ import { cn } from '@/lib/utils';
 import ViewTracker from '@/components/ViewTracker';
 import TitleWithEffect from '@/components/TitleWithEffect';
 import MeshBackground from '@/components/MeshBackground';
+import LinkCard from '@/components/LinkCard';
 import { Inter, Roboto, Playfair_Display, Space_Mono, Poppins, Montserrat } from 'next/font/google';
 import { ExternalLink } from 'lucide-react';
 import ProductsSection from '@/components/ProductsSection';
@@ -300,30 +301,14 @@ export default async function PublicPage({ params }: { params: Promise<{ slug: s
           {/* Links Section */}
           {links.length > 0 && (
             <div className="space-y-3">
-              {links.map((link: { _id: string; title: string; url: string; imageUrl?: string | null }) => (
-                <a
+              {links.map((link: { _id: string; title: string; url: string; imageUrl?: string | null; description?: string; metadataImage?: string; isAdult?: boolean; useMetadata?: boolean }) => (
+                <LinkCard
                   key={link._id}
-                  href={link.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={cn(
-                    'block w-full p-4 transition-all duration-300 hover:scale-[1.02] hover:shadow-md',
-                    getCardClasses(),
-                    'flex items-center justify-between group',
-                  )}
-                  style={{ borderRadius: buttonRadius }}
-                >
-                  <div className="flex items-center gap-3">
-                    {link.imageUrl && <img src={link.imageUrl} className="w-10 h-10 rounded-lg object-cover" alt="" />}
-                    <span className="font-semibold" style={{ color: getCardTextColor() }}>
-                      {link.title}
-                    </span>
-                  </div>
-                  <ExternalLink
-                    className="w-4 h-4 opacity-50 group-hover:opacity-100 transition-opacity"
-                    style={{ color: getCardTextColor() }}
-                  />
-                </a>
+                  link={link}
+                  cardClasses={getCardClasses()}
+                  buttonRadius={buttonRadius}
+                  textColor={getCardTextColor()}
+                />
               ))}
             </div>
           )}

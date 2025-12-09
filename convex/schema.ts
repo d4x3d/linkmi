@@ -74,6 +74,17 @@ export default defineSchema({
     // For reordering
     position: v.number(),
     isActive: v.optional(v.boolean()),
+    // Auto-fetch metadata (favicon, description, image)
+    useMetadata: v.optional(v.boolean()),
+    // Fetched metadata
+    description: v.optional(v.string()),
+    metadataImage: v.optional(v.string()),
+    // 18+ content warning
+    isAdult: v.optional(v.boolean()),
+    // GitHub/Repo specific fields
+    isRepo: v.optional(v.boolean()),
+    livePreviewUrl: v.optional(v.string()),
+    repoUrl: v.optional(v.string()),
   }).index('by_userId', ['userId']),
 
   // Digital products for the store
