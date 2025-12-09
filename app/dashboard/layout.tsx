@@ -9,10 +9,11 @@ import { cn } from '@/lib/utils';
 import { useAuth } from '@workos-inc/authkit-nextjs/components';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { DashboardGuard } from './DashboardGuard';
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const { signOut, user } = useAuth();
+  const { user } = useAuth();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navItems = [
@@ -70,7 +71,9 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         <Button
           variant="ghost"
           className="w-full justify-start text-red-500 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/10"
-          onClick={() => signOut()}
+          onClick={() => {
+            window.location.href = '/sign-out';
+          }}
         >
           <LogOut className="w-5 h-5 mr-3" />
           Sign Out
@@ -80,39 +83,41 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   );
 
   return (
-    <div className="flex h-screen bg-neutral-50 dark:bg-neutral-900">
-      {/* Desktop Sidebar */}
-      <aside className="w-64 border-r border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950 hidden md:flex flex-col">
-        <SidebarContent />
-      </aside>
+    <DashboardGuard>
+      <div className="flex h-screen bg-neutral-50 dark:bg-neutral-900">
+        {/* Desktop Sidebar */}
+        <aside className="w-64 border-r border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950 hidden md:flex flex-col">
+          <SidebarContent />
+        </aside>
 
-      {/* Mobile Header */}
-      <div className="md:hidden fixed top-0 left-0 right-0 z-40 bg-white dark:bg-neutral-950 border-b border-neutral-200 dark:border-neutral-800">
-        <div className="flex items-center justify-between p-4">
-          <h1 className="text-xl font-bold bg-gradient-to-r from-violet-600 to-indigo-600 bg-clip-text text-transparent">
-            LinkMi
-          </h1>
-          <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
-            <SheetTrigger
-              asChild
-              aria-label="Open navigation"
-              aria-expanded={mobileMenuOpen}
-            >
-              <Button variant="ghost" size="icon" className="md:hidden">
-                <Menu className="h-6 w-6" />
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="left" className="w-64 p-0">
-              <SidebarContent />
-            </SheetContent>
-          </Sheet>
+        {/* Mobile Header */}
+        <div className="md:hidden fixed top-0 left-0 right-0 z-40 bg-white dark:bg-neutral-950 border-b border-neutral-200 dark:border-neutral-800">
+          <div className="flex items-center justify-between p-4">
+            <h1 className="text-xl font-bold bg-gradient-to-r from-violet-600 to-indigo-600 bg-clip-text text-transparent">
+              Slobi
+            </h1>
+            <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+              <SheetTrigger
+                asChild
+                aria-label="Open navigation"
+                aria-expanded={mobileMenuOpen}
+              >
+                <Button variant="ghost" size="icon" className="md:hidden">
+                  <Menu className="h-6 w-6" />
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="left" className="w-64 p-0">
+                <SidebarContent />
+              </SheetContent>
+            </Sheet>
+          </div>
         </div>
-      </div>
 
-      {/* Main Content */}
-      <main className="flex-1 overflow-y-auto pt-16 md:pt-0">
-        {children}
-      </main>
-    </div>
+        {/* Main Content */}
+        <main className="flex-1 overflow-y-auto pt-16 md:pt-0">
+          {children}
+        </main>
+      </div>
+    </DashboardGuard>
   );
 }
