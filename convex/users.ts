@@ -3,6 +3,47 @@ import { v } from 'convex/values';
 
 export const me = query({
   args: {},
+  returns: v.union(
+    v.null(),
+    v.object({
+      _id: v.optional(v.id('users')),
+      _creationTime: v.optional(v.number()),
+      subject: v.string(),
+      slug: v.optional(v.string()),
+      pageType: v.optional(v.union(v.literal('links'), v.literal('store'), v.literal('hybrid'))),
+      title: v.optional(v.string()),
+      bio: v.optional(v.string()),
+      profileImageId: v.optional(v.id('_storage')),
+      backgroundImageId: v.optional(v.id('_storage')),
+      profileImageUrl: v.optional(v.union(v.string(), v.null())),
+      backgroundImageUrl: v.optional(v.union(v.string(), v.null())),
+      colorScheme: v.optional(v.string()),
+      primaryColor: v.optional(v.string()),
+      backgroundColor: v.optional(v.string()),
+      fontFamily: v.optional(v.string()),
+      backgroundStyle: v.optional(v.string()),
+      gradientEndColor: v.optional(v.string()),
+      gradientDirection: v.optional(v.string()),
+      textColor: v.optional(v.string()),
+      mutedTextColor: v.optional(v.string()),
+      meshColors: v.optional(v.array(v.string())),
+      meshSpeed: v.optional(v.number()),
+      buttonStyle: v.optional(v.string()),
+      buttonColor: v.optional(v.string()),
+      cardStyle: v.optional(v.string()),
+      themeConfig: v.optional(v.any()),
+      layoutStyle: v.optional(v.string()),
+      socials: v.optional(
+        v.array(
+          v.object({
+            platform: v.string(),
+            url: v.string(),
+            isVisible: v.boolean(),
+          }),
+        ),
+      ),
+    }),
+  ),
   handler: async (ctx) => {
     const identity = await ctx.auth.getUserIdentity();
     if (!identity) {
@@ -13,7 +54,14 @@ export const me = query({
       .withIndex('by_subject', (q) => q.eq('subject', identity.subject))
       .unique();
 
-    if (!user) return null;
+    // If no user record exists, return identity info without slug
+    // This indicates authenticated but needs to create profile
+    if (!user) {
+      return {
+        subject: identity.subject,
+        slug: undefined,
+      };
+    }
 
     // Resolve image URLs
     const profileImageUrl = user.profileImageId ? await ctx.storage.getUrl(user.profileImageId) : null;

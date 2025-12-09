@@ -3,28 +3,36 @@
 import { useQuery } from 'convex/react';
 import { api } from '@/convex/_generated/api';
 import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { Loader2 } from 'lucide-react';
 
 export function WelcomeGuard({ children }: { children: React.ReactNode }) {
   const user = useQuery(api.users.me);
   const router = useRouter();
+  const hasRedirected = useRef(false);
 
   useEffect(() => {
     // Wait for user data to load
     if (user === undefined) return;
+    
+    // Prevent multiple redirects
+    if (hasRedirected.current) return;
 
-    // If no user found, redirect to sign-in
+    // If not authenticated (no identity), redirect to sign-in
     if (user === null) {
+      hasRedirected.current = true;
       router.push('/sign-in');
       return;
     }
 
-    // If user already has a slug, redirect to dashboard
+    // If authenticated and already has a slug, redirect to dashboard
     if (user.slug) {
+      hasRedirected.current = true;
       router.push('/dashboard');
       return;
     }
+    
+    // If authenticated but no slug, stay on welcome page (this is correct)
   }, [user, router]);
 
   // Show loading state while checking
