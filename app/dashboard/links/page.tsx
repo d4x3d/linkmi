@@ -134,7 +134,12 @@ export default function LinksPage() {
     }
   };
 
- 
+  useEffect(() => {
+    if (user && 'socials' in user && user.socials) {
+      setSocials(user.socials);
+    }
+  }, [user]);
+
   // Link Handlers
   const handleAddLink = async () => {
     if (!title || !url) return;

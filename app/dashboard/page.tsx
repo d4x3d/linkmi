@@ -32,7 +32,7 @@ export default function DashboardPage() {
       <div className="space-y-8">
         <div>
           <h2 className="text-3xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100">
-            Welcome back{user?.title ? `, ${user.title}` : ''}
+            Welcome back{user && 'title' in user && user.title ? `, ${user.title}` : ''}
           </h2>
           <p className="text-neutral-500 dark:text-neutral-400 mt-2">
             Here&apos;s what&apos;s happening with your page today.
