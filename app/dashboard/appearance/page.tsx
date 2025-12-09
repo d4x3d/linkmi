@@ -305,10 +305,10 @@ export default function AppearancePage() {
     <div className="flex flex-col lg:flex-row h-[calc(100vh-4rem)] overflow-hidden bg-neutral-100 dark:bg-neutral-900">
       {/* Mobile Sidebar Toggle */}
       <button
-        onClick={() => setMobileSidebarOpen(true)}
-        className="lg:hidden fixed bottom-6 right-6 z-50 bg-violet-600 text-white p-4 rounded-full shadow-lg"
+        onClick={() => setMobileSidebarOpen(!mobileSidebarOpen)}
+        className="lg:hidden fixed bottom-6 right-6 z-50 bg-violet-600 text-white p-4 rounded-full shadow-lg transition-transform active:scale-95"
       >
-        <Menu className="w-6 h-6" />
+        {mobileSidebarOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
       </button>
 
       {/* EDITOR PANEL */}
