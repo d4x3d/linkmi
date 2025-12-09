@@ -91,7 +91,11 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             LinkMi
           </h1>
           <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
-            <SheetTrigger asChild>
+            <SheetTrigger
+              asChild
+              aria-label="Open navigation"
+              aria-expanded={mobileMenuOpen}
+            >
               <Button variant="ghost" size="icon" className="md:hidden">
                 <Menu className="h-6 w-6" />
               </Button>
