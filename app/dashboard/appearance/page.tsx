@@ -121,6 +121,9 @@ export default function AppearancePage() {
   const products = useQuery(api.products.list);
   const updateTheme = useMutation(api.users.updateTheme);
 
+  // Type guard: only proceed if user has a slug (full user record)
+  const hasFullUserRecord = user && 'slug' in user && user.slug !== undefined;
+
   const [isSaving, setIsSaving] = useState(false);
   const [activeTab, setActiveTab] = useState<TabType>('profile');
   const [previewMode, setPreviewMode] = useState<'mobile' | 'desktop'>('mobile');
@@ -152,7 +155,7 @@ export default function AppearancePage() {
 
   // Load user data
   useEffect(() => {
-    if (user) {
+    if (user && user.slug) {
       setTitle(user.title || '');
       setBio(user.bio || '');
       setFontFamily(user.fontFamily || 'Inter');
@@ -330,6 +333,15 @@ export default function AppearancePage() {
     </button>
   );
 
+  // Show loading if user data isn't ready or doesn't have full record
+  if (!hasFullUserRecord) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <Loader2 className="w-8 h-8 animate-spin text-violet-600" />
+      </div>
+    );
+  }
+
   return (
     <div className="fixed inset-0 md:left-64 flex overflow-hidden bg-neutral-100 dark:bg-neutral-900">
       {/* Mobile Sidebar Toggle */}
@@ -411,8 +423,8 @@ export default function AppearancePage() {
                 <Label className="text-neutral-700 dark:text-neutral-300">Profile Picture</Label>
                 <div className="flex items-center gap-4 p-4 bg-neutral-50 dark:bg-neutral-900 rounded-xl border border-neutral-200 dark:border-neutral-800">
                   <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-violet-200">
-                    {user.profileImageUrl ? (
-                      <img src={user.profileImageUrl} alt="Profile" className="w-full h-full object-cover" />
+                    {user?.profileImageUrl ? (
+                      <img src={user?.profileImageUrl} alt="Profile" className="w-full h-full object-cover" />
                     ) : (
                       <div className="w-full h-full bg-gradient-to-br from-violet-500 to-fuchsia-500 flex items-center justify-center text-white text-2xl font-bold">
                         ?
@@ -715,10 +727,10 @@ export default function AppearancePage() {
               </div>
             )}
 
-            {backgroundStyle === 'image' && user.backgroundImageUrl && (
+            {backgroundStyle === 'image' && user?.backgroundImageUrl && (
               <div
                 className="absolute inset-0 z-0 bg-cover bg-center"
-                style={{ backgroundImage: `url(${user.backgroundImageUrl})` }}
+                style={{ backgroundImage: `url(${user?.backgroundImageUrl})` }}
               />
             )}
             {(backgroundStyle === 'image' || backgroundStyle === 'mesh') && (
@@ -729,8 +741,8 @@ export default function AppearancePage() {
             <div className={cn('relative z-10 flex flex-col items-center', previewMode === 'mobile' ? 'p-6 pt-20' : 'p-8 pt-12')}>
               {/* Profile Image */}
               <div className="w-24 h-24 rounded-full mb-4 overflow-hidden border-4 border-white/20 shadow-lg">
-                {user.profileImageUrl ? (
-                  <img src={user.profileImageUrl} alt="Profile" className="w-full h-full object-cover" />
+                {user?.profileImageUrl ? (
+                  <img src={user?.profileImageUrl} alt="Profile" className="w-full h-full object-cover" />
                 ) : (
                   <div className="w-full h-full bg-gradient-to-br from-violet-500 to-fuchsia-500 flex items-center justify-center text-white text-3xl font-bold">
                     {title?.[0]?.toUpperCase() || '?'}
@@ -759,9 +771,9 @@ export default function AppearancePage() {
               {bio && <p className="text-sm text-center mb-4 opacity-80 max-w-[90%] whitespace-pre-wrap">{bio}</p>}
 
               {/* Social Media Links */}
-              {user.socials && user.socials.length > 0 && (
+              {user?.socials && user?.socials.length > 0 && (
                 <div className="flex gap-3 mb-6 flex-wrap justify-center">
-                  {user.socials
+                  {user?.socials
                     .filter((s: any) => (s.isVisible || s.active) && s.url)
                     .map((social: { platform: string; url: string }, idx: number) => {
                       const Icon = SOCIAL_ICONS[social.platform] || MdWeb;

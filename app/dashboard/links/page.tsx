@@ -134,12 +134,7 @@ export default function LinksPage() {
     }
   };
 
-  useEffect(() => {
-    if (user?.socials) {
-      setSocials(user.socials);
-    }
-  }, [user?.socials]);
-
+ 
   // Link Handlers
   const handleAddLink = async () => {
     if (!title || !url) return;
