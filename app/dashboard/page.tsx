@@ -11,6 +11,7 @@ import { Plus } from 'lucide-react';
 export default function DashboardPage() {
   const user = useQuery(api.users.me);
   const metrics = useQuery(api.analytics.getDashboardMetrics);
+  const links = useQuery(api.links.list);
 
   // Helper to format currency
   const formatNaira = (amountInKobo: number) => {
@@ -20,9 +21,11 @@ export default function DashboardPage() {
     }).format(amountInKobo / 100);
   };
 
-  if (user === undefined || metrics === undefined) {
+  if (user === undefined || metrics === undefined || links === undefined) {
     return <DashboardSkeleton />;
   }
+
+  const hasNoLinks = links.length === 0;
 
   return (
     <div className="space-y-8">
@@ -48,6 +51,13 @@ export default function DashboardPage() {
             <CardTitle>Quick Actions</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
+            {hasNoLinks && (
+              <Link href="/dashboard/links" className="block">
+                <Button variant="outline" className="w-full justify-start h-auto py-4 text-base">
+                  <Plus className="mr-3 h-5 w-5" /> Add your first link
+                </Button>
+              </Link>
+            )}
             <Link href="/dashboard/store" className="block">
               <Button variant="outline" className="w-full justify-start h-auto py-4 text-base">
                 <Plus className="mr-3 h-5 w-5" /> Add a new product
