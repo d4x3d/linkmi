@@ -53,7 +53,7 @@ export const requestWithdrawal = action({
     const transferResult: any = await ctx.runAction(api.paystack.initiateTransfer, {
       amount: args.amount,
       recipient: bankAccount.recipientCode,
-      reason: 'LinkMi Withdrawal',
+      reason: 'Slobi Withdrawal',
     });
 
     // 4. Record Withdrawal

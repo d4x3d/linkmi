@@ -9,7 +9,7 @@ export default function ViewTracker({ slug }: { slug: string }) {
   const hasRecorded = useRef(false);
 
   useEffect(() => {
-    const key = `linkmi_view_${slug}`;
+    const key = `slobi_view_${slug}`;
     const hasViewedSession = sessionStorage.getItem(key);
 
     if (!hasRecorded.current && !hasViewedSession) {

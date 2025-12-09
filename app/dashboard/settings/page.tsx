@@ -94,7 +94,7 @@ export default function SettingsPage() {
             </div>
             Appearance
           </CardTitle>
-          <CardDescription>Customize how LinkMi looks on your device.</CardDescription>
+          <CardDescription>Customize how Slobi looks on your device.</CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
           {/* Theme Selection */}
@@ -157,7 +157,7 @@ export default function SettingsPage() {
                 </div>
                 <div>
                   <h4 className={cn('font-semibold', currentTheme === 'dark' ? 'text-white' : 'text-neutral-900')}>
-                    LinkMi Dashboard
+                    Slobi Dashboard
                   </h4>
                   <p className={cn('text-sm', currentTheme === 'dark' ? 'text-neutral-400' : 'text-neutral-500')}>
                     This is how your dashboard will look

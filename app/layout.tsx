@@ -1,25 +1,17 @@
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import { ConvexClientProvider } from '@/components/ConvexClientProvider';
 import { CSPostHogProvider } from '@/components/PostHogProvider';
 import { ThemeProvider } from 'next-themes';
 import { Toaster } from 'sonner';
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
-});
-
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
-});
-
 export const metadata: Metadata = {
-  title: 'LinkMi - One Link for Everything You Are',
+  title: 'Slobi - One Link for Everything You Are',
   description:
     'Create a beautiful, personalized page to showcase your content, sell digital products, and grow your audience.',
+  icons: {
+    icon: '/favicon.png',
+  },
 };
 
 export default function RootLayout({
@@ -29,7 +21,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Chewy&display=swap" rel="stylesheet" />
+      </head>
+      <body className='chewy-regular antialiased'>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <ConvexClientProvider>
             <CSPostHogProvider>

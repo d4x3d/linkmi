@@ -36,7 +36,7 @@ export function PurchaseEmail({ productName, downloadUrl, deliveryNote }: Purcha
           )}
 
           <Hr style={hr} />
-          <Text style={footer}>Powered by LinkMi</Text>
+          <Text style={footer}>Powered by Slobi</Text>
         </Container>
       </Body>
     </Html>

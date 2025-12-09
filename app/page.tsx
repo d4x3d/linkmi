@@ -1,5 +1,7 @@
 'use client';
 
+import Image from 'next/image';
+import TitleWithEffect from '@/components/TitleWithEffect';
 import { useQuery } from 'convex/react';
 import { api } from '@/convex/_generated/api';
 import { useRouter } from 'next/navigation';
@@ -29,8 +31,9 @@ export default function Home() {
     <div className="flex flex-col min-h-screen bg-neutral-50 dark:bg-neutral-900">
       <header className="px-6 py-4 flex items-center justify-between border-b border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950">
         <div className="flex items-center gap-2">
+          <Image src="/favicon.png" alt="Slobi Logo" width={32} height={32} className="rounded-lg" />
           <span className="text-xl font-bold bg-gradient-to-r from-violet-600 to-indigo-600 bg-clip-text text-transparent">
-            LinkMi
+            Slobi
           </span>
         </div>
         <nav className="hidden md:flex items-center gap-6">
@@ -65,9 +68,12 @@ export default function Home() {
 
       <main className="flex-1 flex flex-col items-center justify-center text-center px-4">
         <div className="max-w-3xl space-y-6">
-          <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-neutral-900 dark:text-neutral-50">
-            One Link for Everything You Are
-          </h1>
+          <TitleWithEffect
+            title="One Link for Everything You Are"
+            effect="typewriter"
+            textColor="black"
+            className='chewy-regular'
+          />
           <p className="text-lg md:text-xl text-neutral-500 dark:text-neutral-400 max-w-2xl mx-auto">
             Create a beautiful, personalized page to showcase your content, sell digital products, and grow your
             audience. All in one place.
@@ -88,7 +94,7 @@ export default function Home() {
       </main>
 
       <footer className="py-8 border-t border-neutral-200 dark:border-neutral-800 text-center text-sm text-neutral-500">
-        &copy; {new Date().getFullYear()} LinkMi. All rights reserved.
+        &copy; {new Date().getFullYear()} Slobi. All rights reserved.
       </footer>
     </div>
   );

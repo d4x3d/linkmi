@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { LayoutDashboard, Palette, ShoppingBag, Settings, LogOut, Receipt, Link as LinkIcon, Menu } from 'lucide-react';
+import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import { useAuth } from '@workos-inc/authkit-nextjs/components';
 import { Button } from '@/components/ui/button';
@@ -25,9 +26,10 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
   const SidebarContent = () => (
     <>
-      <div className="p-6">
+      <div className="p-6 flex items-center gap-3">
+        <Image src="/favicon.png" alt="Slobi Logo" width={32} height={32} className="rounded-lg" />
         <h1 className="text-2xl font-bold bg-gradient-to-r from-violet-600 to-indigo-600 bg-clip-text text-transparent">
-          LinkMi
+          Slobi
         </h1>
       </div>
       <nav className="flex-1 px-4 space-y-1">

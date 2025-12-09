@@ -22,7 +22,7 @@ export const sendPurchaseReceipt = internalAction({
     const port = process.env.SMTP_PORT ? parseInt(process.env.SMTP_PORT) : 465;
     const user = process.env.SMTP_USER;
     const pass = process.env.SMTP_PASS;
-    const from = process.env.SMTP_FROM || 'LinkMi <noreply@linkmi.app>';
+    const from = process.env.SMTP_FROM || 'Slobi <noreply@slobi.vercel.app>';
 
     if (!host || !user || !pass) {
       console.error('Missing SMTP configuration. Email not sent.');

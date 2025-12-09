@@ -4,6 +4,7 @@ import React from 'react';
 import { useMutation } from 'convex/react';
 import { api } from '@/convex/_generated/api';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/card';
@@ -36,8 +37,9 @@ export default function WelcomePage() {
   return (
     <div className="flex items-center justify-center h-screen bg-neutral-50 dark:bg-neutral-900">
       <Card className="w-[450px]">
-        <CardHeader>
-          <CardTitle className="text-2xl">Welcome to LinkMi</CardTitle>
+        <CardHeader className="flex flex-col items-center">
+          <Image src="/favicon.png" alt="Slobi Logo" width={48} height={48} className="rounded-xl mb-4" />
+          <CardTitle className="text-2xl">Welcome to Slobi</CardTitle>
           <CardDescription>
             Let&apos;s get you set up. Choose a unique username to create your public page.
           </CardDescription>
@@ -45,7 +47,7 @@ export default function WelcomePage() {
         <CardContent>
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
-              <span className="text-neutral-500 font-medium">linkmi.app/</span>
+              <span className="text-neutral-500 font-medium">slobi.vercel.app/</span>
               <Input
                 type="text"
                 placeholder="username"

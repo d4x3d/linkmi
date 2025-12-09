@@ -7,9 +7,10 @@ interface TitleWithEffectProps {
   title: string;
   effect: string;
   textColor: string;
+  className?: string;
 }
 
-export default function TitleWithEffect({ title, effect, textColor }: TitleWithEffectProps) {
+export default function TitleWithEffect({ title, effect, textColor, className }: TitleWithEffectProps) {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -19,7 +20,7 @@ export default function TitleWithEffect({ title, effect, textColor }: TitleWithE
   // SSR fallback
   if (!isMounted) {
     return (
-      <h1 className="text-3xl font-extrabold tracking-tight mb-2" style={{ color: textColor }}>
+      <h1 className={`text-3xl font-extrabold tracking-tight mb-2 ${className}`} style={{ color: textColor }}>
         {title}
       </h1>
     );
@@ -27,7 +28,7 @@ export default function TitleWithEffect({ title, effect, textColor }: TitleWithE
 
   if (effect === 'typewriter') {
     return (
-      <h1 className="text-3xl font-extrabold tracking-tight mb-2" style={{ color: textColor }}>
+      <h1 className={`text-3xl font-extrabold tracking-tight mb-2 ${className}`} style={{ color: textColor }}>
         <Typewriter
           options={{
             strings: [title],
@@ -43,7 +44,7 @@ export default function TitleWithEffect({ title, effect, textColor }: TitleWithE
 
   // Default: no effect
   return (
-    <h1 className="text-3xl font-extrabold tracking-tight mb-2" style={{ color: textColor }}>
+    <h1 className={`text-3xl font-extrabold tracking-tight mb-2 ${className}`} style={{ color: textColor }}>
       {title}
     </h1>
   );

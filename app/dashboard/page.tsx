@@ -77,7 +77,7 @@ export default function DashboardPage() {
           <CardContent>
             <div className="p-4 bg-neutral-100 dark:bg-neutral-800 rounded-lg break-all flex justify-between items-center gap-2">
               <code className="text-sm text-violet-600 dark:text-violet-400">
-                {user?.slug ? `https://linkmi.app/${user.slug}` : 'No slug set'}
+                {user?.slug ? `https://slobi.vercel.app/${user.slug}` : 'No slug set'}
               </code>
             </div>
             <Button className="w-full mt-4 bg-violet-600 hover:bg-violet-700" asChild>

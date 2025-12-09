@@ -2,6 +2,7 @@ import { fetchQuery } from 'convex/nextjs';
 import { api } from '@/convex/_generated/api';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import ViewTracker from '@/components/ViewTracker';
 import TitleWithEffect from '@/components/TitleWithEffect';
@@ -355,10 +356,11 @@ export default async function PublicPage({ params }: { params: Promise<{ slug: s
         <div className="mt-20 text-center">
           <Link
             href="/"
-            className="text-xs font-medium uppercase tracking-widest opacity-60 hover:opacity-100 transition-opacity"
+            className="inline-flex items-center gap-2 text-xs font-medium uppercase tracking-widest opacity-60 hover:opacity-100 transition-opacity"
             style={{ color: mutedColor }}
           >
-            LinkMi
+            <Image src="/favicon.png" alt="Slobi" width={16} height={16} className="rounded-sm" />
+            Slobi
           </Link>
         </div>
       </div>
