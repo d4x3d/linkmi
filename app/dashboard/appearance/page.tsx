@@ -693,6 +693,18 @@ export default function AppearancePage() {
             </>
           )}
         </div>
+
+        {/* Mobile Save Button at Bottom */}
+        <div className="md:hidden border-t border-neutral-200 dark:border-neutral-800 p-4">
+          <Button
+            onClick={handleSave}
+            disabled={isSaving}
+            className="w-full bg-violet-600 hover:bg-violet-700 text-white gap-2"
+          >
+            {isSaving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
+            Save Changes
+          </Button>
+        </div>
       </div>
 
       {/* PREVIEW PANEL */}
@@ -700,7 +712,7 @@ export default function AppearancePage() {
         <div className="absolute inset-0 pattern-grid-lg text-neutral-200 dark:text-neutral-700 opacity-50" />
         
         {/* Mobile Save Button - Fixed at top */}
-        <div className="md:hidden fixed top-4 right-4 z-50">
+        <div className="md:hidden fixed top-20 right-4 z-50">
           <Button
             onClick={handleSave}
             disabled={isSaving}
