@@ -343,7 +343,7 @@ export default function AppearancePage() {
   }
 
   return (
-    <div className="fixed inset-0 md:left-64 flex overflow-hidden bg-neutral-100 dark:bg-neutral-900">
+    <div className="fixed inset-0 md:left-64 flex overflow-hidden bg-neutral-100 dark:bg-neutral-900 pt-16 md:pt-0">
       {/* Mobile Sidebar Toggle */}
       <button
         onClick={() => setMobileSidebarOpen(!mobileSidebarOpen)}
@@ -396,7 +396,7 @@ export default function AppearancePage() {
                 onClick={handleSave}
                 disabled={isSaving}
                 size="sm"
-                className="bg-violet-600 hover:bg-violet-700 text-white gap-2"
+                className="hidden md:flex bg-violet-600 hover:bg-violet-700 text-white gap-2"
               >
                 {isSaving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
                 Save
@@ -696,14 +696,27 @@ export default function AppearancePage() {
       </div>
 
       {/* PREVIEW PANEL */}
-      <div className="flex-1 bg-neutral-100 dark:bg-neutral-900 p-4 md:p-6 lg:p-8 flex items-center justify-center overflow-hidden relative">
+      <div className="flex-1 bg-neutral-100 dark:bg-neutral-900 p-2 md:p-6 lg:p-8 flex items-center justify-center overflow-hidden relative pt-20 md:pt-4">
         <div className="absolute inset-0 pattern-grid-lg text-neutral-200 dark:text-neutral-700 opacity-50" />
+        
+        {/* Mobile Save Button - Fixed at top */}
+        <div className="md:hidden fixed top-4 right-4 z-50">
+          <Button
+            onClick={handleSave}
+            disabled={isSaving}
+            size="sm"
+            className="bg-violet-600 hover:bg-violet-700 text-white gap-2 shadow-lg"
+          >
+            {isSaving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
+            Save
+          </Button>
+        </div>
 
         <div
           className={cn(
             'relative transition-all',
             previewMode === 'mobile'
-              ? 'w-[340px] h-[700px] border-[14px] border-black rounded-[3rem] bg-white dark:bg-neutral-800 overflow-hidden shadow-2xl ring-1 ring-black/5 dark:ring-white/5 z-10'
+              ? 'w-[320px] h-[600px] md:w-[340px] md:h-[700px] border-[8px] md:border-[14px] border-black rounded-[2rem] md:rounded-[3rem] bg-white dark:bg-neutral-800 overflow-hidden shadow-2xl ring-1 ring-black/5 dark:ring-white/5 z-10'
               : 'w-full h-full max-w-6xl border-4 border-black rounded-lg bg-white dark:bg-neutral-800 overflow-hidden shadow-2xl ring-1 ring-black/5 dark:ring-white/5 z-10',
           )}
         >
@@ -796,20 +809,37 @@ export default function AppearancePage() {
               )}
 
               {/* Links & Products */}
-              <div className="w-full space-y-4">
+              <div className="w-full space-y-3 max-w-sm">
                 {mockLinks.map((link: { _id: string; title: string; url: string }) => (
                   <div
                     key={link._id}
                     className={cn(
-                      'w-full p-4 flex items-center justify-between transition-transform active:scale-95',
+                      'w-full p-4 flex items-center gap-3 transition-transform active:scale-95 hover:scale-[1.02]',
                       getCardClasses(),
                     )}
                     style={{ borderRadius: previewStyles.buttonRadius }}
                   >
-                    <span className="font-medium text-sm" style={{ color: getCardTextColor() }}>
-                      {link.title}
-                    </span>
-                    <div />
+                    {/* Mock favicon */}
+                    <div className="w-6 h-6 rounded bg-gradient-to-br from-violet-500 to-indigo-500 flex items-center justify-center shrink-0">
+                      <div className="w-3 h-3 bg-white rounded-sm opacity-80" />
+                    </div>
+                    
+                    {/* Link content */}
+                    <div className="flex-1 min-w-0">
+                      <span className="font-medium text-sm block truncate" style={{ color: getCardTextColor() }}>
+                        {link.title}
+                      </span>
+                      <span className="text-xs opacity-60 block truncate" style={{ color: getCardTextColor() }}>
+                        {link.url}
+                      </span>
+                    </div>
+                    
+                    {/* Arrow icon */}
+                    <div className="w-4 h-4 opacity-40" style={{ color: getCardTextColor() }}>
+                      <svg viewBox="0 0 16 16" fill="currentColor">
+                        <path d="M8.22 2.97a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L11.44 8.5H2.75a.75.75 0 0 1 0-1.5h8.69L8.22 4.03a.75.75 0 0 1 0-1.06Z"/>
+                      </svg>
+                    </div>
                   </div>
                 ))}
 

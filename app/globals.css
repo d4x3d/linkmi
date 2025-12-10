@@ -209,3 +209,27 @@
     box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.15);
   }
 }
+/* Text wrapping utilities for mobile */
+.break-words {
+  word-wrap: break-word;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.hyphens-auto {
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+}
+
+/* Ensure containers don't overflow on mobile */
+@media (max-width: 640px) {
+  .min-w-0 {
+    min-width: 0;
+    max-width: 100%;
+  }
+  
+  .overflow-hidden {
+    overflow: hidden;
+  }
+}

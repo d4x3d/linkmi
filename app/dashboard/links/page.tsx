@@ -376,7 +376,7 @@ export default function LinksPage() {
           <div className="grid gap-3">
             {links?.map((link) => (
               <Card key={link._id} className="group hover:border-violet-300 transition-all hover:shadow-md">
-                <CardContent className="p-3 sm:p-4 flex items-center gap-3 sm:gap-4">
+                <CardContent className="p-3 sm:p-4 flex items-start gap-3 sm:gap-4">
                   <div className="hidden sm:block cursor-move text-neutral-300 hover:text-neutral-500">
                     <GripVertical className="w-5 h-5" />
                   </div>
@@ -402,20 +402,20 @@ export default function LinksPage() {
                       <ExternalLink className="w-6 h-6 text-neutral-400" />
                     )}
                   </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2">
-                      <h3 className="font-semibold text-sm sm:text-base truncate text-neutral-900 dark:text-neutral-100">
+                  <div className="flex-1 min-w-0 overflow-hidden">
+                    <div className="flex items-start gap-2 mb-1">
+                      <h3 className="font-semibold text-sm sm:text-base text-neutral-900 dark:text-neutral-100 break-words hyphens-auto leading-tight flex-1">
                         {link.title}
                       </h3>
                       {link.isAdult && (
-                        <span className="px-1.5 py-0.5 text-[10px] font-bold bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 rounded">
+                        <span className="px-1.5 py-0.5 text-[10px] font-bold bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 rounded shrink-0">
                           18+
                         </span>
                       )}
                     </div>
-                    <p className="text-xs text-neutral-500 dark:text-neutral-400 break-all line-clamp-1">{link.url}</p>
+                    <p className="text-xs text-neutral-500 dark:text-neutral-400 break-all line-clamp-1 mb-1">{link.url}</p>
                     {link.description && (
-                      <p className="text-xs text-neutral-400 dark:text-neutral-500 line-clamp-2 mt-1 break-words">
+                      <p className="text-xs text-neutral-400 dark:text-neutral-500 line-clamp-2 break-words hyphens-auto leading-relaxed">
                         {link.description}
                       </p>
                     )}
