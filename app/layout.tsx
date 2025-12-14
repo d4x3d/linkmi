@@ -4,6 +4,9 @@ import { ConvexClientProvider } from '@/components/ConvexClientProvider';
 import { CSPostHogProvider } from '@/components/PostHogProvider';
 import { ThemeProvider } from 'next-themes';
 import { Toaster } from 'sonner';
+import { Noto_Sans } from "next/font/google";
+
+const notoSans = Noto_Sans({variable:'--font-sans'});
 
 export const metadata: Metadata = {
   title: 'Slobi - One Link for Everything You Are',
@@ -20,7 +23,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className={notoSans.variable}>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />

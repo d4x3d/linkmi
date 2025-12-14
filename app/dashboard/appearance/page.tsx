@@ -711,18 +711,7 @@ export default function AppearancePage() {
       <div className="flex-1 bg-neutral-100 dark:bg-neutral-900 p-2 md:p-6 lg:p-8 flex items-center justify-center overflow-hidden relative pt-20 md:pt-4">
         <div className="absolute inset-0 pattern-grid-lg text-neutral-200 dark:text-neutral-700 opacity-50" />
         
-        {/* Mobile Save Button - Fixed at top */}
-        <div className="md:hidden fixed top-20 right-4 z-50">
-          <Button
-            onClick={handleSave}
-            disabled={isSaving}
-            size="sm"
-            className="bg-violet-600 hover:bg-violet-700 text-white gap-2 shadow-lg"
-          >
-            {isSaving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
-            Save
-          </Button>
-        </div>
+
 
         <div
           className={cn(
