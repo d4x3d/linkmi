@@ -482,7 +482,7 @@ export default function AppearancePage() {
 
               <section className="space-y-3">
                 <Label className="text-neutral-700 dark:text-neutral-300">Background</Label>
-                <Select value={backgroundStyle} onValueChange={setBackgroundStyle}>
+                <Select value={backgroundStyle} onValueChange={(value) => setBackgroundStyle(value ?? backgroundStyle)}>
                   <SelectTrigger>
                     <SelectValue />
                   </SelectTrigger>

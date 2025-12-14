@@ -195,7 +195,7 @@ export default function StorePage() {
                 <Label className="text-violet-600 font-semibold">Deliverable</Label>
                 <div className="space-y-2">
                   <Label>Product Type</Label>
-                  <Select value={type} onValueChange={setType}>
+                  <Select value={type} onValueChange={(value) => setType(value ?? type)}>
                     <SelectTrigger>
                       <SelectValue />
                     </SelectTrigger>
@@ -324,7 +324,7 @@ export default function StorePage() {
 
               <div className="space-y-2">
                 <Label>Type</Label>
-                <Select value={editType} onValueChange={setEditType}>
+                <Select value={editType} onValueChange={(value) => setEditType(value ?? editType)}>
                   <SelectTrigger>
                     <SelectValue />
                   </SelectTrigger>

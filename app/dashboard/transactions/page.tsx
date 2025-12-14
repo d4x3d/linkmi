@@ -170,13 +170,13 @@ export default function TransactionsPage() {
                   <Select
                     value={selectedBankCode}
                     onValueChange={(val) => {
-                      setSelectedBankCode(val);
+                      setSelectedBankCode(val ?? '');
                       setResolvedAccountName('');
                     }}
                     disabled={loadingBanks}
                   >
                     <SelectTrigger>
-                      <SelectValue placeholder="Select a bank..." />
+                      <SelectValue />
                     </SelectTrigger>
                     <SelectContent className="max-h-[300px]">
                       {banks.map((bank: any) => (
